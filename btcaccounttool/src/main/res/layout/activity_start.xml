@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/colorPrimary"
+              android:gravity="center"
+              android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="130dp"
+        android:layout_marginTop="20dp"
+        android:src="@mipmap/start_logo"/>
+
+    <TextView
+        style="@style/TextView22_black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Btc Account Tool"
+        android:textColor="@color/white"
+        android:textStyle="bold"/>
+
+    <TextView
+        style="@style/TextView22_black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="provide by"
+        android:textColor="@color/white"
+        android:textStyle="italic"/>
+
+    <TextView
+        style="@style/TextView22_black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="ArcBlock OCAP Service"
+        android:textColor="@color/white"
+        android:textStyle="bold"/>
+
+</LinearLayout>

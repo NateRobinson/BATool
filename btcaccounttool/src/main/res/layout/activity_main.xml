@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".ui.MainActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/title_tv"
+                style="@style/TextView22_black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="60dp"
+                android:gravity="center"
+                android:text="BTC Account Tool"
+                android:textColor="@color/colorPrimary"
+                android:textSize="30sp"
+                android:textStyle="bold"/>
+
+            <LinearLayout
+                android:id="@+id/search_ll"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/search_ll_bg"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/search_et"
+                    style="@style/TextView16_black"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/transparent"
+                    android:hint="Please input an account address"
+                    android:imeOptions="actionSearch"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"/>
+
+                <ImageView
+                    android:id="@+id/scan_iv"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/circle_click_gray_bg"
+                    android:clickable="true"
+                    android:padding="10dp"
+                    android:src="@mipmap/qr"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/TextView18_black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Menus"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold"/>
+
+                <LinearLayout
+                    android:id="@+id/richest_account_list_ll"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/rectangle_click_bg"
+                    android:clickable="true">
+
+                    <TextView
+                        style="@style/TextView16_black"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="Richest Accounts List"/>
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="48dp"
+                        android:src="@mipmap/right_arrow"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/light_gray"/>
+
+                <LinearLayout
+                    android:id="@+id/stared_account_list_ll"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="@drawable/rectangle_click_bg"
+                    android:clickable="true">
+
+                    <TextView
+                        style="@style/TextView16_black"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="Stared Accounts List"/>
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="48dp"
+                        android:src="@mipmap/right_arrow"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/light_gray"/>
+
+                <LinearLayout
+                    android:id="@+id/about_us_ll"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="@drawable/rectangle_click_bg"
+                    android:clickable="true">
+
+                    <TextView
+                        style="@style/TextView16_black"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="About Us"/>
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="48dp"
+                        android:src="@mipmap/right_arrow"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/light_gray"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

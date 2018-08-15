@@ -1,0 +1,6 @@
+query blockByHeight($height: Int!) {
+  blockByHeight(height: $height) {
+    height
+    hash
+  }
+}

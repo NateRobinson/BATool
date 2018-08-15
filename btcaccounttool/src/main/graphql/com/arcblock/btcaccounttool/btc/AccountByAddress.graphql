@@ -1,0 +1,8 @@
+query accountByAddress($address: String!) {
+  accountByAddress(address: $address) {
+    address
+    balance
+    pubKey
+    scriptType
+  }
+}

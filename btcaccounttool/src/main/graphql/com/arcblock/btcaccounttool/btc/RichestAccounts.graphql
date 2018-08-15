@@ -1,0 +1,12 @@
+query richestAccounts($paging:PageInput){
+  richestAccounts(paging:$paging){
+    data {
+      balance
+      address
+    }
+    page{
+      cursor
+      next
+    }
+  }
+}

@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/back_iv"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/circle_click_bg"
+            android:padding="10dp"
+            android:src="@mipmap/back"/>
+
+        <TextView
+            style="@style/TextView22_black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Account Detail"
+            android:textStyle="bold"/>
+
+        <ImageView
+            android:id="@+id/qr_iv"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/circle_click_bg"
+            android:padding="10dp"
+            android:src="@mipmap/qr_code"
+            android:tint="@color/txt_black"/>
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginLeft="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/TextView18_black"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Score"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold"/>
+
+                <ImageView
+                    android:id="@+id/un_star_iv"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/circle_click_bg"
+                    android:clickable="true"
+                    android:padding="10dp"
+                    android:src="@mipmap/un_star"
+                    android:visibility="visible"/>
+
+                <ImageView
+                    android:id="@+id/stared_iv"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/circle_click_bg"
+                    android:clickable="true"
+                    android:padding="10dp"
+                    android:src="@mipmap/stared"
+                    android:visibility="gone"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <com.arcblock.btcaccounttool.view.ScoreView
+                    android:id="@+id/score_view"
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"/>
+
+            </LinearLayout>
+
+            <TextView
+                style="@style/TextView18_black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="Summary"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/TextView14_black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Address"/>
+
+                    <TextView
+                        android:id="@+id/address_tv"
+                        style="@style/TextView14_black"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/left_margin"
+                        android:layout_weight="1"
+                        android:gravity="right|center_vertical"
+                        android:textStyle="bold"
+                        tools:text="1"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/TextView14_black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Balance"/>
+
+                    <TextView
+                        android:id="@+id/balance_tv"
+                        style="@style/TextView14_black"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/left_margin"
+                        android:layout_weight="1"
+                        android:gravity="right|center_vertical"
+                        android:textStyle="bold"
+                        tools:text="1"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>
