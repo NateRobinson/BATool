@@ -45,6 +45,7 @@ import com.arcblock.btcaccounttool.utils.StatusBarUtils;
 import com.arcblock.btcaccounttool.view.ScoreView;
 import com.arcblock.btcaccounttool.viewmodel.StaredAccountViewModel;
 import com.arcblock.corekit.bean.CoreKitBean;
+import com.arcblock.corekit.config.CoreKitConfig;
 import com.arcblock.corekit.utils.CoreKitBeanMapper;
 import com.arcblock.corekit.viewmodel.CoreKitViewModel;
 import com.blankj.utilcode.util.ConvertUtils;
@@ -132,7 +133,7 @@ public class AccountDetailActivity extends AppCompatActivity {
 			@Override
 			public void onClick(View v) {
 
-				View qrCodeView = LayoutInflater.from(AccountDetailActivity.this).inflate(R.layout.dialog_qr_code,null);
+				View qrCodeView = LayoutInflater.from(AccountDetailActivity.this).inflate(R.layout.dialog_qr_code, null);
 				ImageView qr_code_iv = qrCodeView.findViewById(R.id.qr_code_iv);
 				try {
 					qr_code_iv.setImageBitmap(EncodingHandler.createQRCode(address, ConvertUtils.dp2px(300)));
@@ -165,8 +166,8 @@ public class AccountDetailActivity extends AppCompatActivity {
 		// init a query
 		AccountByAddressQuery query = AccountByAddressQuery.builder().address(address).build();
 		// init the ViewModel with DefaultFactory
-		CoreKitViewModel.DefaultFactory factory = new CoreKitViewModel.DefaultFactory(accountMapper, BtcAccountToolApp.getInstance());
-		mAccountByAddressViewModel = ViewModelProviders.of(this, factory).get(CoreKitViewModel.class);
+		CoreKitViewModel.DefaultFactory factory = new CoreKitViewModel.DefaultFactory(query, accountMapper, BtcAccountToolApp.getInstance(), CoreKitConfig.API_TYPE_BTC);
+		mAccountByAddressViewModel = CoreKitViewModel.getInstance(this, factory);
 		mAccountByAddressViewModel.getQueryData(query).observe(this, new Observer<CoreKitBean<AccountByAddressQuery.AccountByAddress>>() {
 			@Override
 			public void onChanged(@Nullable CoreKitBean<AccountByAddressQuery.AccountByAddress> coreKitBean) {

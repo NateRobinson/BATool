@@ -27,6 +27,7 @@ import com.apollographql.apollo.fetcher.ApolloResponseFetchers;
 import com.apollographql.apollo.response.CustomTypeAdapter;
 import com.apollographql.apollo.response.CustomTypeValue;
 import com.arcblock.corekit.ABCoreKitClient;
+import com.arcblock.corekit.config.CoreKitConfig;
 import com.facebook.stetho.Stetho;
 import com.uuzuche.lib_zxing.activity.ZXingLibrary;
 
@@ -96,7 +97,7 @@ public class BtcAccountToolApp extends Application {
 			}
 		};
 
-		mABCoreClient = ABCoreKitClient.builder(this)
+		mABCoreClient = ABCoreKitClient.builder(this, CoreKitConfig.API_TYPE_BTC)
 				//.addCustomTypeAdapter(CustomType.DATETIME, dateCustomTypeAdapter)
 				.setOkHttpClient(okHttpClient)
 				.setDefaultResponseFetcher(ApolloResponseFetchers.CACHE_AND_NETWORK)

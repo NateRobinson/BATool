@@ -18,7 +18,7 @@ public class StaredAccountListAdapter extends BaseQuickAdapter<StaredAccountBean
 	}
 
 	@Override
-	protected void convert(BaseViewHolder helper, StaredAccountBean item) {
+	protected void convert(BaseViewHolder helper, final StaredAccountBean item) {
 		helper.setText(R.id.order_tv, helper.getAdapterPosition() + 1 + "");
 		helper.setText(R.id.address_tv, item.getAccountAddress());
 		helper.getView(R.id.stared_iv).setOnClickListener(new View.OnClickListener() {

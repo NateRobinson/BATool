@@ -1,5 +1,6 @@
 # BATool
-A BTC Account Tool based on ArcBlock OCAP Service API.
+
+A BTC Account Tool based on ArcBlock Android SDK .
 
 ## Screenshots
 

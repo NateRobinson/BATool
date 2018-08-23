@@ -51,7 +51,7 @@ public class RichestAccountListAdapter extends BaseQuickAdapter<RichestAccountsQ
 	}
 
 	@Override
-	protected void convert(BaseViewHolder helper, RichestAccountsQuery.Datum item) {
+	protected void convert(BaseViewHolder helper, final RichestAccountsQuery.Datum item) {
 		int posi = helper.getAdapterPosition();
 		ImageView orderIv = helper.getView(R.id.order_iv);
 		TextView orderTv = helper.getView(R.id.order_tv);
