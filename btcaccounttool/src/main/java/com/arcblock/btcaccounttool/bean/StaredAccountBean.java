@@ -30,37 +30,37 @@ import android.support.annotation.NonNull;
 @Entity(tableName = "stared_account")
 public class StaredAccountBean {
 
-	// 0 - normal ; 1 - deleted
-	@ColumnInfo(name = "del_flag")
-	private int delFlag;
+    // 0 - normal ; 1 - deleted
+    @ColumnInfo(name = "del_flag")
+    private int delFlag;
 
-	@PrimaryKey
-	@NonNull
-	@ColumnInfo(name = "account_address")
-	private String accountAddress;
+    @PrimaryKey
+    @NonNull
+    @ColumnInfo(name = "account_address")
+    private String accountAddress;
 
-	public StaredAccountBean() {
-	}
+    public StaredAccountBean() {
+    }
 
-	@Ignore
-	public StaredAccountBean(int delFlag, String accountAddress) {
-		this.delFlag = delFlag;
-		this.accountAddress = accountAddress;
-	}
+    @Ignore
+    public StaredAccountBean(int delFlag, String accountAddress) {
+        this.delFlag = delFlag;
+        this.accountAddress = accountAddress;
+    }
 
-	public int getDelFlag() {
-		return delFlag;
-	}
+    public int getDelFlag() {
+        return delFlag;
+    }
 
-	public void setDelFlag(int delFlag) {
-		this.delFlag = delFlag;
-	}
+    public void setDelFlag(int delFlag) {
+        this.delFlag = delFlag;
+    }
 
-	public String getAccountAddress() {
-		return accountAddress;
-	}
+    public String getAccountAddress() {
+        return accountAddress;
+    }
 
-	public void setAccountAddress(String accountAddress) {
-		this.accountAddress = accountAddress;
-	}
+    public void setAccountAddress(String accountAddress) {
+        this.accountAddress = accountAddress;
+    }
 }

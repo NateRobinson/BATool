@@ -36,29 +36,29 @@ import com.arcblock.btcaccounttool.dao.StaredAccountDao;
 @Database(entities = {StaredAccountBean.class}, version = 2)
 public abstract class AccountToolDB extends RoomDatabase {
 
-	private static AccountToolDB sInstance;
+    private static AccountToolDB sInstance;
 
-	public static final Migration MIGRATION_1_2 = new Migration(1, 2) {
-		@Override
-		public void migrate(@NonNull SupportSQLiteDatabase database) {
-			database.execSQL("ALTER TABLE stared_account "
-					+ "ADD COLUMN del_flag INTEGER");
-		}
-	};
+    public static final Migration MIGRATION_1_2 = new Migration(1, 2) {
+        @Override
+        public void migrate(@NonNull SupportSQLiteDatabase database) {
+            database.execSQL("ALTER TABLE stared_account "
+                    + "ADD COLUMN del_flag INTEGER");
+        }
+    };
 
-	public static AccountToolDB getDatabase(Context context) {
-		if (sInstance == null) {
-			sInstance = Room.databaseBuilder(context.getApplicationContext(), AccountToolDB.class,
-					"account_tool.db").addMigrations(MIGRATION_1_2).build();
-		}
-		return sInstance;
-	}
+    public static AccountToolDB getDatabase(Context context) {
+        if (sInstance == null) {
+            sInstance = Room.databaseBuilder(context.getApplicationContext(), AccountToolDB.class,
+                    "account_tool.db").addMigrations(MIGRATION_1_2).build();
+        }
+        return sInstance;
+    }
 
-	public static void onDestroy() {
-		sInstance = null;
-	}
+    public static void onDestroy() {
+        sInstance = null;
+    }
 
-	@MainThread
-	public abstract StaredAccountDao staredAccountDao();
+    @MainThread
+    public abstract StaredAccountDao staredAccountDao();
 
 }

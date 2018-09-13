@@ -35,49 +35,49 @@ import com.uuzuche.lib_zxing.activity.CodeUtils;
 
 public class ScanActivity extends AppCompatActivity {
 
-	@Override
-	protected void onCreate(@Nullable Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-		this.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-		this.getWindow().setBackgroundDrawableResource(R.color.transparent);
+        this.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        this.getWindow().setBackgroundDrawableResource(R.color.transparent);
 
-		StatusBarUtils.MIUISetStatusBarLightMode(this.getWindow(), false);
-		StatusBarUtils.FlymeSetStatusBarLightMode(this.getWindow(), false);
+        StatusBarUtils.MIUISetStatusBarLightMode(this.getWindow(), false);
+        StatusBarUtils.FlymeSetStatusBarLightMode(this.getWindow(), false);
 
-		setContentView(R.layout.activity_scan);
+        setContentView(R.layout.activity_scan);
 
-		findViewById(R.id.back_iv).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				finish();
-			}
-		});
+        findViewById(R.id.back_iv).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
-		CaptureFragment captureFragment = new CaptureFragment();
-		// 为二维码扫描界面设置定制化界面
-		CodeUtils.setFragmentArgs(captureFragment, R.layout.my_custom_scan);
-		captureFragment.setAnalyzeCallback(analyzeCallback);
-		getSupportFragmentManager().beginTransaction().replace(R.id.fl_my_container, captureFragment).commit();
-	}
+        CaptureFragment captureFragment = new CaptureFragment();
+        // 为二维码扫描界面设置定制化界面
+        CodeUtils.setFragmentArgs(captureFragment, R.layout.my_custom_scan);
+        captureFragment.setAnalyzeCallback(analyzeCallback);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fl_my_container, captureFragment).commit();
+    }
 
-	/**
-	 * 二维码解析回调函数
-	 */
-	CodeUtils.AnalyzeCallback analyzeCallback = new CodeUtils.AnalyzeCallback() {
-		@Override
-		public void onAnalyzeSuccess(Bitmap mBitmap, String result) {
-			Intent resultIntent = new Intent();
-			Bundle bundle = new Bundle();
-			bundle.putInt(CodeUtils.RESULT_TYPE, CodeUtils.RESULT_SUCCESS);
-			bundle.putString(CodeUtils.RESULT_STRING, result.replace("bitcoin:",""));
-			resultIntent.putExtras(bundle);
-			setResult(RESULT_OK, resultIntent);
-			finish();
-		}
+    /**
+     * 二维码解析回调函数
+     */
+    CodeUtils.AnalyzeCallback analyzeCallback = new CodeUtils.AnalyzeCallback() {
+        @Override
+        public void onAnalyzeSuccess(Bitmap mBitmap, String result) {
+            Intent resultIntent = new Intent();
+            Bundle bundle = new Bundle();
+            bundle.putInt(CodeUtils.RESULT_TYPE, CodeUtils.RESULT_SUCCESS);
+            bundle.putString(CodeUtils.RESULT_STRING, result.replace("bitcoin:", ""));
+            resultIntent.putExtras(bundle);
+            setResult(RESULT_OK, resultIntent);
+            finish();
+        }
 
-		@Override
-		public void onAnalyzeFailed() {
+        @Override
+        public void onAnalyzeFailed() {
 //			Intent resultIntent = new Intent();
 //			Bundle bundle = new Bundle();
 //			bundle.putInt(CodeUtils.RESULT_TYPE, CodeUtils.RESULT_FAILED);
@@ -85,6 +85,6 @@ public class ScanActivity extends AppCompatActivity {
 //			resultIntent.putExtras(bundle);
 //			setResult(RESULT_OK, resultIntent);
 //			finish();
-		}
-	};
+        }
+    };
 }

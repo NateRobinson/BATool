@@ -39,88 +39,88 @@ import java.util.List;
 
 public class RichestAccountListAdapter extends BaseQuickAdapter<RichestAccountsQuery.Datum, BaseViewHolder> {
 
-	private List<StaredAccountBean> mStaredAccountBeans;
+    private List<StaredAccountBean> mStaredAccountBeans;
 
-	public RichestAccountListAdapter(int layoutResId, @Nullable List<RichestAccountsQuery.Datum> data, List<StaredAccountBean> staredAccountBeans) {
-		super(layoutResId, data);
-		this.mStaredAccountBeans = staredAccountBeans;
-	}
+    public RichestAccountListAdapter(int layoutResId, @Nullable List<RichestAccountsQuery.Datum> data, List<StaredAccountBean> staredAccountBeans) {
+        super(layoutResId, data);
+        this.mStaredAccountBeans = staredAccountBeans;
+    }
 
-	public void setNewListData(List<RichestAccountsQuery.Datum> newList) {
-		this.mData = newList;
-	}
+    public void setNewListData(List<RichestAccountsQuery.Datum> newList) {
+        this.mData = newList;
+    }
 
-	@Override
-	protected void convert(BaseViewHolder helper, final RichestAccountsQuery.Datum item) {
-		int posi = helper.getAdapterPosition();
-		ImageView orderIv = helper.getView(R.id.order_iv);
-		TextView orderTv = helper.getView(R.id.order_tv);
-		if (posi < 3) {
-			orderIv.setVisibility(View.VISIBLE);
-			orderTv.setVisibility(View.GONE);
-			if (posi == 0) {
-				orderIv.setBackgroundResource(R.mipmap.order_first);
-			} else if (posi == 1) {
-				orderIv.setBackgroundResource(R.mipmap.order_second);
-			} else if (posi == 2) {
-				orderIv.setBackgroundResource(R.mipmap.order_third);
-			}
-		} else {
-			orderIv.setVisibility(View.GONE);
-			orderTv.setVisibility(View.VISIBLE);
-			orderTv.setText(posi + 1 + "");
-		}
+    @Override
+    protected void convert(BaseViewHolder helper, final RichestAccountsQuery.Datum item) {
+        int posi = helper.getAdapterPosition();
+        ImageView orderIv = helper.getView(R.id.order_iv);
+        TextView orderTv = helper.getView(R.id.order_tv);
+        if (posi < 3) {
+            orderIv.setVisibility(View.VISIBLE);
+            orderTv.setVisibility(View.GONE);
+            if (posi == 0) {
+                orderIv.setBackgroundResource(R.mipmap.order_first);
+            } else if (posi == 1) {
+                orderIv.setBackgroundResource(R.mipmap.order_second);
+            } else if (posi == 2) {
+                orderIv.setBackgroundResource(R.mipmap.order_third);
+            }
+        } else {
+            orderIv.setVisibility(View.GONE);
+            orderTv.setVisibility(View.VISIBLE);
+            orderTv.setText(posi + 1 + "");
+        }
 
-		helper.setText(R.id.address_tv, item.getAddress());
-		helper.setText(R.id.balance_tv, "Balance: " + item.getBalance() + " BTC");
+        helper.setText(R.id.address_tv, item.getAddress());
+        helper.setText(R.id.balance_tv, "Balance: " + item.getBalance() + " BTC");
 
-		ImageView stared_iv = helper.getView(R.id.stared_iv);
-		ImageView unstar_iv = helper.getView(R.id.unstar_iv);
+        ImageView stared_iv = helper.getView(R.id.stared_iv);
+        ImageView unstar_iv = helper.getView(R.id.unstar_iv);
 
-		if (isStared(item.getAddress())) {
-			unstar_iv.setVisibility(View.GONE);
-			stared_iv.setVisibility(View.VISIBLE);
-		} else {
-			unstar_iv.setVisibility(View.VISIBLE);
-			stared_iv.setVisibility(View.GONE);
-		}
+        if (isStared(item.getAddress())) {
+            unstar_iv.setVisibility(View.GONE);
+            stared_iv.setVisibility(View.VISIBLE);
+        } else {
+            unstar_iv.setVisibility(View.VISIBLE);
+            stared_iv.setVisibility(View.GONE);
+        }
 
-		// cancel star
-		stared_iv.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				new AsyncTask<Void, Void, Void>() {
-					@Override
-					protected Void doInBackground(Void... voids) {
-						AccountToolDB.getDatabase(mContext).staredAccountDao().update(new StaredAccountBean(1, item.getAddress()));
-						return null;
-					}
-				}.execute();
-			}
-		});
+        // cancel star
+        stared_iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AsyncTask<Void, Void, Void>() {
+                    @Override
+                    protected Void doInBackground(Void... voids) {
+                        AccountToolDB.getDatabase(mContext).staredAccountDao().update(new StaredAccountBean(1, item.getAddress()));
+                        return null;
+                    }
+                }.execute();
+            }
+        });
 
-		// add to star
-		unstar_iv.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				new AsyncTask<Void, Void, Void>() {
-					@Override
-					protected Void doInBackground(Void... voids) {
-						AccountToolDB.getDatabase(mContext).staredAccountDao().insert(new StaredAccountBean(0, item.getAddress()));
-						return null;
-					}
-				}.execute();
-			}
-		});
-	}
+        // add to star
+        unstar_iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AsyncTask<Void, Void, Void>() {
+                    @Override
+                    protected Void doInBackground(Void... voids) {
+                        AccountToolDB.getDatabase(mContext).staredAccountDao().insert(new StaredAccountBean(0, item.getAddress()));
+                        return null;
+                    }
+                }.execute();
+            }
+        });
+    }
 
-	private boolean isStared(String address) {
-		for (int i = 0; i < mStaredAccountBeans.size(); i++) {
-			if (TextUtils.equals(address, mStaredAccountBeans.get(i).getAccountAddress())) {
-				return true;
-			}
-		}
-		return false;
-	}
+    private boolean isStared(String address) {
+        for (int i = 0; i < mStaredAccountBeans.size(); i++) {
+            if (TextUtils.equals(address, mStaredAccountBeans.get(i).getAccountAddress())) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 }

@@ -44,59 +44,59 @@ import java.util.List;
 
 public class StaredAccountListActivity extends AppCompatActivity {
 
-	private List<StaredAccountBean> mStaredAccountBeans = new ArrayList<>();
-	private StaredAccountListAdapter mStaredAccountListAdapter;
+    private List<StaredAccountBean> mStaredAccountBeans = new ArrayList<>();
+    private StaredAccountListAdapter mStaredAccountListAdapter;
 
-	@Override
-	protected void onCreate(@Nullable Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-		this.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-		this.getWindow().setBackgroundDrawableResource(R.color.transparent);
+        this.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        this.getWindow().setBackgroundDrawableResource(R.color.transparent);
 
-		StatusBarUtils.MIUISetStatusBarLightMode(this.getWindow(), false);
-		StatusBarUtils.FlymeSetStatusBarLightMode(this.getWindow(), false);
+        StatusBarUtils.MIUISetStatusBarLightMode(this.getWindow(), false);
+        StatusBarUtils.FlymeSetStatusBarLightMode(this.getWindow(), false);
 
-		setContentView(R.layout.activity_stared_account_list);
+        setContentView(R.layout.activity_stared_account_list);
 
-		initView();
-		initData();
-	}
+        initView();
+        initData();
+    }
 
-	private void initView() {
-		findViewById(R.id.back_iv).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				finish();
-			}
-		});
-		RecyclerView account_list_rcv = findViewById(R.id.account_list_rcv);
-		account_list_rcv.setLayoutManager(new LinearLayoutManager(this));
-		mStaredAccountListAdapter = new StaredAccountListAdapter(R.layout.item_stared_account_list, mStaredAccountBeans);
-		mStaredAccountListAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-			@Override
-			public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-				Intent intent = new Intent(StaredAccountListActivity.this, AccountDetailActivity.class);
-				intent.putExtra(AccountDetailActivity.ADDRESS_KEY, mStaredAccountBeans.get(position).getAccountAddress());
-				startActivity(intent);
-			}
-		});
-		account_list_rcv.setAdapter(mStaredAccountListAdapter);
+    private void initView() {
+        findViewById(R.id.back_iv).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        RecyclerView account_list_rcv = findViewById(R.id.account_list_rcv);
+        account_list_rcv.setLayoutManager(new LinearLayoutManager(this));
+        mStaredAccountListAdapter = new StaredAccountListAdapter(R.layout.item_stared_account_list, mStaredAccountBeans);
+        mStaredAccountListAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Intent intent = new Intent(StaredAccountListActivity.this, AccountDetailActivity.class);
+                intent.putExtra(AccountDetailActivity.ADDRESS_KEY, mStaredAccountBeans.get(position).getAccountAddress());
+                startActivity(intent);
+            }
+        });
+        account_list_rcv.setAdapter(mStaredAccountListAdapter);
 
-		mStaredAccountListAdapter.bindToRecyclerView(account_list_rcv);
-		mStaredAccountListAdapter.setEmptyView(R.layout.empty_of_stared_account_list);
-	}
+        mStaredAccountListAdapter.bindToRecyclerView(account_list_rcv);
+        mStaredAccountListAdapter.setEmptyView(R.layout.empty_of_stared_account_list);
+    }
 
-	private void initData() {
-		StaredAccountViewModel staredAccountViewModel = ViewModelProviders.of(this).get(StaredAccountViewModel.class);
-		staredAccountViewModel.getAllStaredAccountBean().observe(this, new Observer<List<StaredAccountBean>>() {
-			@Override
-			public void onChanged(@Nullable List<StaredAccountBean> staredAccountBeans) {
-				Log.e("onChanged", "total=>" + staredAccountBeans.size() + " count");
-				mStaredAccountBeans.clear();
-				mStaredAccountBeans.addAll(staredAccountBeans);
-				mStaredAccountListAdapter.notifyDataSetChanged();
-			}
-		});
-	}
+    private void initData() {
+        StaredAccountViewModel staredAccountViewModel = ViewModelProviders.of(this).get(StaredAccountViewModel.class);
+        staredAccountViewModel.getAllStaredAccountBean().observe(this, new Observer<List<StaredAccountBean>>() {
+            @Override
+            public void onChanged(@Nullable List<StaredAccountBean> staredAccountBeans) {
+                Log.e("onChanged", "total=>" + staredAccountBeans.size() + " count");
+                mStaredAccountBeans.clear();
+                mStaredAccountBeans.addAll(staredAccountBeans);
+                mStaredAccountListAdapter.notifyDataSetChanged();
+            }
+        });
+    }
 }

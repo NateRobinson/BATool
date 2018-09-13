@@ -35,18 +35,18 @@ import java.util.List;
 
 @Dao
 public interface StaredAccountDao {
-	@Query("Select * from stared_account where del_flag = 0")
-	LiveData<List<StaredAccountBean>> getAllStaredAccountBean();
+    @Query("Select * from stared_account where del_flag = 0")
+    LiveData<List<StaredAccountBean>> getAllStaredAccountBean();
 
-	@Query("Select * from stared_account where del_flag = 0 and account_address = :address")
-	LiveData<StaredAccountBean> selectStaredAccountBean(String address);
+    @Query("Select * from stared_account where del_flag = 0 and account_address = :address")
+    LiveData<StaredAccountBean> selectStaredAccountBean(String address);
 
-	@Update(onConflict = OnConflictStrategy.REPLACE)
-	void update(StaredAccountBean staredAccountBean);
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    void update(StaredAccountBean staredAccountBean);
 
-	@Insert(onConflict = OnConflictStrategy.REPLACE)
-	void insert(StaredAccountBean staredAccountBean);
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insert(StaredAccountBean staredAccountBean);
 
-	@Delete
-	void delete(StaredAccountBean staredAccountBean);
+    @Delete
+    void delete(StaredAccountBean staredAccountBean);
 }
