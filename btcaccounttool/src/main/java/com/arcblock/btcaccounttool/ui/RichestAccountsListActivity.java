@@ -142,6 +142,16 @@ public class RichestAccountsListActivity extends AppCompatActivity {
 
         @Override
         public List<RichestAccountsQuery.Datum> map(Response<RichestAccountsQuery.Data> dataResponse) {
+            if (dataResponse != null && dataResponse.data().getRichestAccounts() != null) {
+                // set page info to CoreKitPagedQuery
+                if (dataResponse.data().getRichestAccounts().getPage() != null) {
+                    // set is have next flag to CoreKitPagedQuery
+                    setHasMore(dataResponse.data().getRichestAccounts().getPage().isNext());
+                    // set new cursor to CoreKitPagedQuery
+                    setCursor(dataResponse.data().getRichestAccounts().getPage().getCursor());
+                }
+                return dataResponse.data().getRichestAccounts().getData();
+            }
             return null;
         }
 
