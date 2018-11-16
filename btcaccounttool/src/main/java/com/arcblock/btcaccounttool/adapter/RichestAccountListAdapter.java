@@ -32,6 +32,7 @@ import com.arcblock.btcaccounttool.R;
 import com.arcblock.btcaccounttool.bean.StaredAccountBean;
 import com.arcblock.btcaccounttool.btc.RichestAccountsQuery;
 import com.arcblock.btcaccounttool.db.AccountToolDB;
+import com.arcblock.btcaccounttool.utils.BtcValueUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 
@@ -72,7 +73,7 @@ public class RichestAccountListAdapter extends BaseQuickAdapter<RichestAccountsQ
         }
 
         helper.setText(R.id.address_tv, item.getAddress());
-        helper.setText(R.id.balance_tv, "Balance: " + item.getBalance() + " BTC");
+        helper.setText(R.id.balance_tv, "Balance: " + BtcValueUtils.formatBtcValue(item.getBalance()));
 
         ImageView stared_iv = helper.getView(R.id.stared_iv);
         ImageView unstar_iv = helper.getView(R.id.unstar_iv);

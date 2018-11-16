@@ -33,7 +33,7 @@ import android.support.annotation.NonNull;
 import com.arcblock.btcaccounttool.bean.StaredAccountBean;
 import com.arcblock.btcaccounttool.dao.StaredAccountDao;
 
-@Database(entities = {StaredAccountBean.class}, version = 2)
+@Database(entities = {StaredAccountBean.class}, version = 2, exportSchema = false)
 public abstract class AccountToolDB extends RoomDatabase {
 
     private static AccountToolDB sInstance;

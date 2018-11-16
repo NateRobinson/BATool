@@ -22,14 +22,12 @@
 package com.arcblock.btcaccounttool.ui;
 
 import android.animation.ObjectAnimator;
-import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,19 +35,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.apollographql.apollo.api.Query;
-import com.apollographql.apollo.api.Response;
 import com.arcblock.btcaccounttool.BtcAccountToolApp;
 import com.arcblock.btcaccounttool.R;
 import com.arcblock.btcaccounttool.bean.StaredAccountBean;
 import com.arcblock.btcaccounttool.btc.AccountByAddressQuery;
 import com.arcblock.btcaccounttool.db.AccountToolDB;
+import com.arcblock.btcaccounttool.utils.BtcValueUtils;
 import com.arcblock.btcaccounttool.utils.StatusBarUtils;
 import com.arcblock.btcaccounttool.view.ScoreView;
 import com.arcblock.btcaccounttool.viewmodel.StaredAccountViewModel;
-import com.arcblock.corekit.ABCoreKitClient;
 import com.arcblock.corekit.CoreKitQuery;
-import com.arcblock.corekit.bean.CoreKitBean;
+import com.arcblock.corekit.CoreKitResultListener;
 import com.blankj.utilcode.util.ConvertUtils;
 import com.uuzuche.lib_zxing.encoding.EncodingHandler;
 
@@ -152,20 +148,25 @@ public class AccountDetailActivity extends AppCompatActivity {
     }
 
     private void initData() {
-        // init AccountByAddressQueryHelper
-        AccountByAddressQueryHelper accountByAddressQueryHelper = new AccountByAddressQueryHelper(this, this, BtcAccountToolApp.INSTANCE.abCoreKitClient());
-        accountByAddressQueryHelper.setObserve(new Observer<CoreKitBean<AccountByAddressQuery.AccountByAddress>>() {
+        CoreKitQuery coreKitQuery = new CoreKitQuery(this, BtcAccountToolApp.INSTANCE.abCoreKitClient());
+        coreKitQuery.query(AccountByAddressQuery.builder().address(address).build(), new CoreKitResultListener<AccountByAddressQuery.Data>() {
             @Override
-            public void onChanged(@Nullable CoreKitBean<AccountByAddressQuery.AccountByAddress> coreKitBean) {
-                if (coreKitBean.getStatus() == CoreKitBean.SUCCESS_CODE) {
-                    com.arcblock.btcaccounttool.btc.AccountByAddressQuery.AccountByAddress accountByAddress = coreKitBean.getData();
-                    if (accountByAddress != null) {
-                        address_tv.setText(accountByAddress.getAddress());
-                        balance_tv.setText(accountByAddress.getBalance() + " BTC");
-                    }
-                } else {
-                    // show error msg.
+            public void onSuccess(AccountByAddressQuery.Data data) {
+                com.arcblock.btcaccounttool.btc.AccountByAddressQuery.AccountByAddress accountByAddress = data.getAccountByAddress();
+                if (accountByAddress != null) {
+                    address_tv.setText(accountByAddress.getAddress());
+                    balance_tv.setText(BtcValueUtils.formatBtcValue(accountByAddress.getBalance()));
                 }
+            }
+
+            @Override
+            public void onError(Throwable throwable) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
             }
         });
 
@@ -183,28 +184,4 @@ public class AccountDetailActivity extends AppCompatActivity {
             }
         });
     }
-
-    /**
-     * AccountByAddressQueryHelper for AccountByAddressQuery
-     */
-    private class AccountByAddressQueryHelper extends CoreKitQuery<AccountByAddressQuery.Data, AccountByAddressQuery.AccountByAddress> {
-
-        public AccountByAddressQueryHelper(FragmentActivity activity, LifecycleOwner lifecycleOwner, ABCoreKitClient client) {
-            super(activity, lifecycleOwner, client);
-        }
-
-        @Override
-        public AccountByAddressQuery.AccountByAddress map(Response<AccountByAddressQuery.Data> dataResponse) {
-            if (dataResponse != null) {
-                return dataResponse.data().getAccountByAddress();
-            }
-            return null;
-        }
-
-        @Override
-        public Query getQuery() {
-            return AccountByAddressQuery.builder().address(address).build();
-        }
-    }
-
 }
